@@ -1,0 +1,15 @@
+{
+  "name": "Charadas",
+  "short_name": "Charadas",
+  "description": "Juego de charadas: teléfono en la frente, inclina para responder.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#14112b",
+  "theme_color": "#14112b",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

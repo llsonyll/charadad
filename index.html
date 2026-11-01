@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#14112b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Charadas</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- INICIO -->
+  <section id="home" class="screen active">
+    <header class="home-head">
+      <h1>Charadas</h1>
+      <p>Ponte el teléfono en la frente y adivina con las pistas de tus amigos.</p>
+    </header>
+
+    <div class="settings">
+      <span class="label">Tiempo</span>
+      <div class="chips" id="durations" role="radiogroup" aria-label="Duración de la ronda"></div>
+    </div>
+
+    <div class="grid" id="categories"></div>
+
+    <details class="how">
+      <summary>¿Cómo se juega?</summary>
+      <ol>
+        <li>Elige una categoría y coloca el teléfono en tu frente, en horizontal, con la pantalla hacia tus amigos.</li>
+        <li>Ellos te dan pistas (o hacen mímica) sin decir la palabra.</li>
+        <li><b>Inclina hacia abajo</b> (mira al suelo) cuando aciertes.</li>
+        <li><b>Inclina hacia arriba</b> (mira al techo) para pasar.</li>
+        <li>Adivina todas las que puedas antes de que acabe el tiempo.</li>
+      </ol>
+      <p class="muted">Sin sensor de movimiento (por ejemplo en computadora) aparecen botones; también sirven las flechas ↓ y ↑ del teclado.</p>
+    </details>
+  </section>
+
+  <!-- PREPARACIÓN -->
+  <section id="ready" class="screen">
+    <button class="back" data-go="home" aria-label="Volver">←</button>
+    <div class="ready-body">
+      <div class="ready-cat"><span id="readyEmoji"></span><span id="readyName"></span></div>
+      <p class="ready-title">Coloca el teléfono en tu frente</p>
+      <div class="legend">
+        <div class="legend-item ok"><span class="arrow">⬇</span><b>Correcto</b><small>Inclina hacia abajo</small></div>
+        <div class="legend-item pass"><span class="arrow">⬆</span><b>Pasar</b><small>Inclina hacia arriba</small></div>
+      </div>
+      <p id="readyHint" class="muted"></p>
+      <button id="startBtn" class="primary">Empezar</button>
+      <div id="holdBar" class="hold-bar" aria-hidden="true"><i></i></div>
+    </div>
+  </section>
+
+  <!-- CUENTA REGRESIVA -->
+  <section id="countdown" class="screen">
+    <div id="countNum" class="count-num">3</div>
+    <p class="count-text">¡Prepárate!</p>
+  </section>
+
+  <!-- JUEGO -->
+  <section id="play" class="screen">
+    <div class="hud">
+      <span id="timer" class="timer">60</span>
+      <span class="live-score"><span id="liveScore">0</span> ✓</span>
+    </div>
+    <div id="word" class="word"></div>
+    <div id="flash" class="flash" aria-live="assertive"></div>
+    <div class="manual">
+      <button id="passBtn" class="pass-btn">⬆ Pasar</button>
+      <button id="okBtn" class="ok-btn">Correcto ⬇</button>
+    </div>
+  </section>
+
+  <!-- FIN DE TIEMPO -->
+  <section id="timeup" class="screen">
+    <div class="timeup-text">¡Tiempo!</div>
+  </section>
+
+  <!-- RESULTADOS -->
+  <section id="results" class="screen">
+    <div class="results-head">
+      <p class="muted" id="resultsCat"></p>
+      <div class="score"><span id="finalScore">0</span><small>aciertos</small></div>
+    </div>
+    <ul id="resultsList" class="results-list"></ul>
+    <div class="results-actions">
+      <button id="againBtn" class="primary">Jugar otra vez</button>
+      <button class="secondary" data-go="home">Categorías</button>
+    </div>
+  </section>
+
+  <!-- PALABRAS PERSONALIZADAS -->
+  <dialog id="customDlg">
+    <form method="dialog" class="custom-form">
+      <h2>Tus palabras</h2>
+      <p class="muted">Escribe una palabra o frase por línea (mínimo 3).</p>
+      <textarea id="customWords" rows="10" placeholder="Pizza&#10;Mi jefe bailando&#10;Las vacaciones del 2024"></textarea>
+      <div class="dlg-actions">
+        <button value="cancel" class="secondary">Cancelar</button>
+        <button id="customPlay" value="play" class="primary">Jugar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="words.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
